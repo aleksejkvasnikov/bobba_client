@@ -1,4 +1,3 @@
-import { lookup } from 'dns';
 import React, { SyntheticEvent } from 'react';
 import BobbaEnvironment from '../../bobba/BobbaEnvironment';
 
