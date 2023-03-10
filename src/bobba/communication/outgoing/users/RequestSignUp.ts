@@ -1,9 +1,9 @@
 import ClientMessage from "../../protocol/ClientMessage";
-import { LOGIN } from "../../protocol/OpCodes/ClientOpCodes";
+import { SIGN_UP } from "../../protocol/OpCodes/ClientOpCodes";
 
-export default class RequestLogin extends ClientMessage {
+export default class RequestSignUp extends ClientMessage {
     constructor(username: string, password: string, look: string) {
-        super(LOGIN);
+        super(SIGN_UP);
         this.appendString(username);
         this.appendString(look);
         this.appendString(password);
