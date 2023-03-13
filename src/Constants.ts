@@ -1,5 +1,5 @@
 export default class Constants {
-    public static readonly WS_URL = "wss://game.bobba.io/"
+    public static readonly WS_URL = "ws://localhost:1232/"
 
     public static readonly AVATAR_RESOURCES_URL = "https://images.bobba.io/gordon/PRODUCTION-202006192205-424220153/";
     public static readonly FURNI_RESOURCES_URL = "https://images.bobba.io/dcr/hof_furni/";

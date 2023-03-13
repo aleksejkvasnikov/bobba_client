@@ -48,9 +48,11 @@ class JoinForm extends React.Component<JoinFormProps, JoinFormState> {
     handleSubmit = (event: SyntheticEvent) => {
         const { username, password, look } = this.state;
         event.preventDefault();
-
+        const { login } = this.state;
         if (username.length > 0 || username.length > MAX_NAME_LENGTH) {
+            if(login)
             BobbaEnvironment.getGame().uiManager.doLogin(username, password, look);
+            else BobbaEnvironment.getGame().uiManager.doSignUp(username, password, look);
             this.setState({
                 queuedLogin: true,
             });
