@@ -1,3 +1,4 @@
+export const DISPLAY_ERROR_MESSAGE = 2;
 export const LOGIN_OK = 3;
 export const ROOM_DATA_HEIGHTMAP = 4;
 export const PLAYERS_DATA = 6;

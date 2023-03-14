@@ -15,6 +15,7 @@ export default class UIManager {
     game: Game;
     //Log in    
     onSetUserData: (user: User) => void;
+    onLoginError: (message: string) => void;
     //Room item info
     onSelectFurni: FurniInfo;
     onSelectUser: UserInfo;
@@ -97,6 +98,7 @@ export default class UIManager {
         this.onOpenMessengerChat = () => { };
         this.onShowMessengerAlert = () => { };
         this.onCloseRoomInfo = () => { };
+        this.onLoginError = () => { };
     }
 
     log(text: string) {

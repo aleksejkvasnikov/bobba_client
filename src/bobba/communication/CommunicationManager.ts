@@ -2,8 +2,9 @@ import IMessageHandler from "../net/IMessageHandler";
 import WebSocketClient from "../net/WebSocketClient";
 import BobbaEnvironment from "../BobbaEnvironment";
 import IIncomingEvent from "./incoming/IIncomingEvent";
-import { LOGIN_OK, ROOM_DATA_HEIGHTMAP, ROOM_ITEM_DATA, PLAYERS_DATA, PLAYER_STATUS, PLAYER_REMOVE, CHAT, PLAYER_WAVE, ITEM_REMOVE, ITEM_STATE, WALL_ITEM_DATA, INVENTORY_ITEMS, INVENTORY_ITEM_REMOVE, CATALOGUE_INDEX, CATALOGUE_PAGE, CATALOGUE_PURCHASE_ERROR, CATALOGUE_PURCHASE_INFO, CREDITS_BALANCE, ROOM_DATA_MODEL_INFO, ROOM_DATA, NAVIGATOR_ROOM_LIST, NAVIGATOR_LEAVE_ROOM, MESSENGER_FRIENDS, MESSENGER_MESSAGE, MESSENGER_REQUESTS, MESSENGER_SEARCH_RESULT, MESSENGER_UPDATE_FRIEND } from "./protocol/OpCodes/ServerOpCodes";
+import { LOGIN_OK, ROOM_DATA_HEIGHTMAP, ROOM_ITEM_DATA, PLAYERS_DATA, PLAYER_STATUS, PLAYER_REMOVE, CHAT, PLAYER_WAVE, ITEM_REMOVE, ITEM_STATE, WALL_ITEM_DATA, INVENTORY_ITEMS, INVENTORY_ITEM_REMOVE, CATALOGUE_INDEX, CATALOGUE_PAGE, CATALOGUE_PURCHASE_ERROR, CATALOGUE_PURCHASE_INFO, CREDITS_BALANCE, ROOM_DATA_MODEL_INFO, ROOM_DATA, NAVIGATOR_ROOM_LIST, NAVIGATOR_LEAVE_ROOM, MESSENGER_FRIENDS, MESSENGER_MESSAGE, MESSENGER_REQUESTS, MESSENGER_SEARCH_RESULT, MESSENGER_UPDATE_FRIEND, DISPLAY_ERROR_MESSAGE } from "./protocol/OpCodes/ServerOpCodes";
 import HandleLoginOk from "./incoming/generic/HandleLoginOk";
+import HandleLoginFailed from "./incoming/generic/HandleLoginFailed";
 import ServerMessage from "./protocol/ServerMessage";
 import ClientMessage from "./protocol/ClientMessage";
 import HandleFloorItems from "./incoming/rooms/HandleFloorItems";
@@ -44,6 +45,7 @@ export default class CommunicationManager implements IMessageHandler {
     }
 
     _registerRequests() {
+        this.requestHandlers[DISPLAY_ERROR_MESSAGE] = new HandleLoginFailed();
         this.requestHandlers[LOGIN_OK] = new HandleLoginOk();
         this.requestHandlers[ROOM_DATA_HEIGHTMAP] = new HandleHeightMap();
         this.requestHandlers[PLAYERS_DATA] = new HandleRoomUsers();
