@@ -104,6 +104,10 @@ export default class Game {
         }
     }
 
+    handleUserError(message: string) {
+        this.uiManager.onLoginError(message);
+    }
+
     handleRoomModelInfo(modelId: string, roomId: number) {
         this.communicationManager.sendMessage(new RequestHeightMap());
     }

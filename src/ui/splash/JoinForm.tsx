@@ -19,6 +19,7 @@ const initialState = {
     wrongUsername: false,
     queuedLogin: false,
     login: false,
+    errorMessage: ''
 };
 
 type JoinFormState = {
@@ -27,7 +28,8 @@ type JoinFormState = {
     look: string,
     wrongUsername: boolean,
     queuedLogin: boolean,
-    login: boolean
+    login: boolean,
+    errorMessage: string
 };
 class JoinForm extends React.Component<JoinFormProps, JoinFormState> {
 
@@ -76,6 +78,14 @@ class JoinForm extends React.Component<JoinFormProps, JoinFormState> {
                 });
             }
         }
+
+        const game = BobbaEnvironment.getGame();
+        game.uiManager.onLoginError = (message => {
+            this.setState({
+                errorMessage: message,
+                queuedLogin: false
+            });
+        });
     }
 
     getLooks() {
@@ -96,12 +106,16 @@ class JoinForm extends React.Component<JoinFormProps, JoinFormState> {
     }
 
     render() {
-        const { username, password, look, wrongUsername, queuedLogin } = this.state;
+        const { username, password, look, wrongUsername, queuedLogin, errorMessage } = this.state;
         const classname = wrongUsername ? "wrong" : "";
 
         const buttonLogin = queuedLogin ? <button disabled>Loading...</button> : <button onClick={() => this.setState({username: username, password: password, look: look, wrongUsername: wrongUsername, queuedLogin: queuedLogin, login: true})}>Login</button>
         const buttonSignUp = queuedLogin ? <button disabled>Loading...</button> : <button onClick={() => this.setState({username: username, password: password, look: look, wrongUsername: wrongUsername, queuedLogin: queuedLogin, login: false})}>Sign Up</button>
 
+        let errorMessageWindow = <></>;
+        if (errorMessage != null) {
+            errorMessageWindow = <>{errorMessage}</>
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <input type="text" autoComplete="off" maxLength={MAX_NAME_LENGTH} className={classname} placeholder="Username" name="username" onChange={this.handleInputChange} value={username} />
@@ -114,6 +128,9 @@ class JoinForm extends React.Component<JoinFormProps, JoinFormState> {
                 <br />
                 {buttonLogin}
                 {buttonSignUp}
+                <br />
+                <br />
+                <span style={{color: 'red'}}>{errorMessageWindow}</span>
             </form>
         );
     }
