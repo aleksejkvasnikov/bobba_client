@@ -106,7 +106,7 @@
 }
 
 .catalogue .content {
-    background: url('/images/catalogue/layout_bg.png') no-repeat;
+    background: url('../../../public/images/catalogue/layout_bg.png') no-repeat;
     position: absolute;
     left: 0;
     width: 360px;

@@ -188,25 +188,25 @@
 .nav .wrapper .basic_rooms .room_button button.door_bell {
     width: 13px;
     height: 16px;
-    background-image: url('/images/navigator/doormode_doorbell_small.png');
+    background-image: url('../../../public/images/navigator/doormode_doorbell_small.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.door_password {
     width: 13px;
     height: 16px;
-    background-image: url('/images/navigator/doormode_password_small.png');
+    background-image: url('../../../public/images/navigator/doormode_password_small.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.make_favourite {
     width: 18px;
     height: 16px;
-    background-image: url('/images/navigator/make_favourite.png');
+    background-image: url('../../../public/images/navigator/make_favourite.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.make_favourite:hover, .nav .wrapper .basic_rooms .room_button button.favourite {
     width: 18px;
     height: 16px;
-    background-image: url('/images/navigator/favourite.png');
+    background-image: url('../../../public/images/navigator/favourite.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.usercount {
@@ -215,23 +215,23 @@
     color: #ffffff;
     width: 34px;
     height: 13px;
-    background-image: url('/images/navigator/usercount_fixed_b.png');
+    background-image: url('../../../public/images/navigator/usercount_fixed_b.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.usercount.g {
-    background-image: url('/images/navigator/usercount_fixed_g.png');
+    background-image: url('../../../public/images/navigator/usercount_fixed_g.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.usercount.o {
-    background-image: url('/images/navigator/usercount_fixed_g.png');
+    background-image: url('../../../public/images/navigator/usercount_fixed_g.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.usercount.r {
-    background-image: url('/images/navigator/usercount_fixed_r.png');
+    background-image: url('../../../public/images/navigator/usercount_fixed_r.png');
 }
 
 .nav .wrapper .basic_rooms .room_button button.usercount.y {
-    background-image: url('/images/navigator/usercount_fixed_y.png');
+    background-image: url('../../../public/images/navigator/usercount_fixed_y.png');
 }
 
 .nav .wrapper .basic_rooms p {

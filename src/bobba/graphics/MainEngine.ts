@@ -43,9 +43,6 @@ export default class MainEngine {
             resolution: 1,
         });
 
-        app.renderer.autoResize = true;
-        logicApp.renderer.autoResize = true;
-
         app.ticker.add(delta => gameLoop(delta));
         app.ticker.minFPS = 0;
 
