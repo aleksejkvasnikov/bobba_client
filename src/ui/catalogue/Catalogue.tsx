@@ -169,7 +169,7 @@ export default class Catalogue extends React.Component<CatalogueProps, Catalogue
                         </div>
                         <div className="button_container">
                             <span>{item.cost} crédito{item.cost === 1 ? '' : 's'}</span>
-                            <button onClick={this.handleTryPurchase}>Comprar</button>
+                            <button onClick={this.handleTryPurchase}>Buy</button>
                         </div>
                     </>
                 );
