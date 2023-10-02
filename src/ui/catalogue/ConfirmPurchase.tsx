@@ -36,7 +36,7 @@ export default class ConfirmPurchase extends React.Component<ConfirmPurchaseProp
                     <button className="close" onClick={onClose}>
                         X
                     </button>
-                    <h2 className="handle">Confirmar compra</h2>
+                    <h2 className="handle">Confirm purchase</h2>
                     <hr />
                     <div className="wrapper">
                         <div className="first_row">
@@ -49,16 +49,16 @@ export default class ConfirmPurchase extends React.Component<ConfirmPurchaseProp
                         </div>
                         <div className="second_row">
                             <p>
-                                {item.baseItem.furniBase.itemData.name} cuesta {item.cost} crédito{item.cost === 1 ? '' : 's'}.
+                                {item.baseItem.furniBase.itemData.name} costs {item.cost} credit{item.cost === 1 ? '' : 's'}.
                             </p>
                             <p>
-                                Tienes 420 créditos.
+                                You have 420 credits.
                             </p>
                         </div>
                         <div className="third_row">
-                            <button onClick={onPurchase}>Comprar</button>
-                            <button>Regalar</button>
-                            <button onClick={onClose}>Cancelar</button>
+                            <button onClick={onPurchase}>Buy</button>
+                            <button>Give a present</button>
+                            <button onClick={onClose}>Cancel</button>
                         </div>
                     </div>
                 </div>

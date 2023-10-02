@@ -168,8 +168,8 @@ export default class Catalogue extends React.Component<CatalogueProps, Catalogue
                             <p>{item.baseItem.furniBase.itemData.description}</p>
                         </div>
                         <div className="button_container">
-                            <span>{item.cost} crédito{item.cost === 1 ? '' : 's'}</span>
-                            <button onClick={this.handleTryPurchase}>Comprar</button>
+                            <span>{item.cost} credit{item.cost === 1 ? '' : 's'}</span>
+                            <button onClick={this.handleTryPurchase}>Buy</button>
                         </div>
                     </>
                 );
