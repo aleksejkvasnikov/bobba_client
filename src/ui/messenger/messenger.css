@@ -74,21 +74,21 @@
 .messenger .main_tab button.open_arrow {
     width: 9px;
     height: 5px;
-    background-image: url('/images/messenger/arrow_down_white.png');
+    background-image: url('../../../public/images/messenger/arrow_down_white.png');
 }
 
 .messenger .main_tab button.close_arrow {
     width: 5px;
     height: 9px;
-    background-image: url('/images/messenger/arrow_right_white.png');
+    background-image: url('../../../public/images/messenger/arrow_right_white.png');
 }
 
 .messenger .main_tab.selected button.open_arrow {
-    background-image: url('/images/messenger/arrow_down_black.png');
+    background-image: url('../../../public/images/messenger/arrow_down_black.png');
 }
 
 .messenger .main_tab.selected button.close_arrow {
-    background-image: url('/images/messenger/arrow_right_black.png');
+    background-image: url('../../../public/images/messenger/arrow_right_black.png');
 }
 
 .messenger .wrapper {
@@ -176,31 +176,31 @@
 .messenger .wrapper .friend_list .friend .icons_container button.ask_for_friend {
     width: 16px;
     height: 15px;
-    background-image: url('/images/messenger/ask_for_friend.png');
+    background-image: url('../../../public/images/messenger/ask_for_friend.png');
 }
 
 .messenger .wrapper .friend_list .friend .icons_container button.follow_friend {
     width: 16px;
     height: 15px;
-    background-image: url('/images/messenger/follow_friend.png');
+    background-image: url('../../../public/images/messenger/follow_friend.png');
 }
 
 .messenger .wrapper .friend_list .friend .icons_container button.start_chat {
     width: 16px;
     height: 14px;
-    background-image: url('/images/messenger/start_chat.png');
+    background-image: url('../../../public/images/messenger/start_chat.png');
 }
 
 .messenger .wrapper .friend_list .friend .icons_container button.accept {
     width: 16px;
     height: 13px;
-    background-image: url('/images/messenger/accept.png');
+    background-image: url('../../../public/images/messenger/accept.png');
 }
 
 .messenger .wrapper .friend_list .friend .icons_container button.decline {
     width: 13px;
     height: 13px;
-    background-image: url('/images/messenger/decline.png');
+    background-image: url('../../../public/images/messenger/decline.png');
 }
 
 .messenger .wrapper .actions_container {
