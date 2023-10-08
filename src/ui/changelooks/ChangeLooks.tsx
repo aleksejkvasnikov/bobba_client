@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject } from 'react';
+import React, { ButtonHTMLAttributes, ReactNode, RefObject } from 'react';
 import Draggable from 'react-draggable';
 import './changelooks.css';
 import BobbaEnvironment from '../../bobba/BobbaEnvironment';
@@ -129,6 +129,7 @@ type ChangeLooksState = {
     look: string,
     gender: Gender,
     zIndex: number,
+    grid: (ButtonWithFlag | SecondaryTabCurrent)[],
 };
 
 const initialState: ChangeLooksState = {
@@ -138,7 +139,22 @@ const initialState: ChangeLooksState = {
     look: '',
     gender: 'M',
     zIndex: WindowManager.getNextZIndex(),
+    grid: [],
 };
+
+interface ButtonWithFlag {
+    button: HTMLCanvasElement;
+    isHc: boolean;
+    figure: string; 
+    partId: string; 
+    selected: boolean; 
+    type: MainTabId;
+}
+
+interface SecondaryTabCurrent {
+    typeId: SecondaryTab;
+    currentPart: FigurePart | null;
+}
 
 class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
     constructor(props: ChangeLooksProps) {
@@ -161,6 +177,9 @@ class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
                 visible: false,
             });
         });
+    }
+
+    componentDidUpdate(prevProps: Readonly<ChangeLooksProps>, prevState: Readonly<ChangeLooksState>, snapshot?: any): void {
     }
 
     getMainTabs(): ReactNode {
@@ -291,22 +310,12 @@ class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
         return palettes;
     }
 
-    generatePartImage(figure: string, selected: boolean, type: MainTabId): ReactNode {
-        const ref: RefObject<HTMLImageElement> = React.createRef();
+    generatePartImage(figure: string, selected: boolean, type: MainTabId): Promise<HTMLCanvasElement> {
         const avatarImager = BobbaEnvironment.getGame().avatarImager;
-
-        avatarImager.generateGeneric(new AvatarInfo(figure, 4, 4, ["std"], "std", 0, type === 'generic', false, "n"), false).then(canvas => {
-            const image = canvas2Image(canvas);
-            const renderedImg = ref.current;
-            if (renderedImg != null) {
-                renderedImg.src = image.src;
-                renderedImg.className = type + (selected ? ' selected ' : '');
-            }
-        });
-
-        return (
-            <img className={selected ? 'selected ' : ''} ref={ref} src="images/avatar_editor/avatar_editor_download_icon.png" alt={figure} />
-        );
+        const promise: Promise<HTMLCanvasElement> = new Promise((resolve, reject) => {
+            resolve(avatarImager.generateGeneric(new AvatarInfo(figure, 4, 4, ["std"], "std", 0, type === 'generic', false, "n"), false))
+        })
+        return promise
     }
 
     generatePlatform(): ReactNode {
@@ -332,25 +341,21 @@ class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
         );
     }
 
-    generateGrid(): ReactNode {
+    generateGrid(): Promise<ButtonWithFlag | SecondaryTabCurrent>[] {
         const { mainTab, secondTabId, gender } = this.state;
         const mainDef = avatarMainTabs.find(value => value.id === mainTab);
         if (mainDef !== undefined) {
             const typeId = mainDef.tabs[secondTabId];
             if (typeId != null) {
                 const partSet = BobbaEnvironment.getGame().avatarImager.getPartSet(typeId.type);
-                const parts: ReactNode[] = [];
+                const parts: Promise<ButtonWithFlag | SecondaryTabCurrent>[] = [];
                 const currentPart = this.calculateCurrentPart();
                 let currentColor = this.calculateCurrentColor(0).toString();
                 if (currentPart != null && currentPart.colors.length > 1) {
                     currentColor += "-" + this.calculateCurrentColor(1);
                 }
                 if (!typeId.required) {
-                    parts.push(
-                        <button onClick={this.handleRemovePart(typeId.type)} key={-1} className={(currentPart == null ? 'selected ' : '')}>
-                            <img src="images/avatar_editor/removeSelection.png" alt="Remove" />
-                        </button>
-                    );
+                    parts.push(new Promise(() => {return {secondaryTab: typeId, currentPart: currentPart}}));
                 }
                 for (let partId in partSet) {
                     const part = partSet[partId];
@@ -358,11 +363,9 @@ class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
                     const isHc = part.club !== 0;
                     const figure = typeId.type + "-" + partId + "-" + currentColor;
                     if ((part.gender === gender || part.gender === 'U') && part.selectable) {
-                        parts.push(
-                            <button onClick={this.handleChangePart(figure)} key={partId} className={(selected ? 'selected ' : '') + (isHc ? 'hc ' : '')}>
-                                {this.generatePartImage(figure, selected, mainDef.id)}
-                            </button>
-                        );
+                        parts.push(this.generatePartImage(figure, selected, mainDef.id).then(image => {
+                            return {button: image, figure: figure, partId: partId, selected: selected, type: mainDef.id, isHc: isHc}
+                        }));
                     }
                 }
                 return parts;
@@ -373,9 +376,12 @@ class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
 
     handleMainTabChange = (mainTab: MainTabId) => () => {
         this.setState({
+            grid: [],
             mainTab,
             secondTabId: 0,
         });
+        Promise.all(this.generateGrid())
+            .then(grid => this.setState({grid: grid}))
     }
 
     handleSecondTabChange = (secondTabId: number) => () => {
@@ -458,7 +464,27 @@ class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
                         </div>
                         <div className="first_row">
                             <div className="parts_grid">
-                                {this.generateGrid()}
+                                {this.state.grid.map(canvas => {
+                                        const ref: RefObject<HTMLImageElement> = React.createRef();
+                                    if ((canvas as ButtonWithFlag).button) {
+                                       
+                                        var button = (canvas as ButtonWithFlag)
+                                        const image = canvas2Image(button.button);
+                                        const renderedImg = ref.current;
+                                        if (renderedImg != null) {
+                                            renderedImg.src = image.src;
+                                            renderedImg.className = button.type + (button.selected ? ' selected ' : '');
+                                        }
+                                        return <button onClick={this.handleChangePart(button.figure)} key={button.partId} className={(button.selected ? 'selected ' : '') + (button.isHc ? 'hc ' : '')}>
+                                            <img className={button.selected ? 'selected ' : ''} ref={ref} src="images/avatar_editor/avatar_editor_download_icon.png" alt={button.figure} />
+                                        </button>
+                                    } else {
+                                        var button0 = (canvas as SecondaryTabCurrent)
+                                        return <button onClick={this.handleRemovePart(button0.typeId.type)} key={-1} className={(button0.currentPart == null ? 'selected ' : '')}>
+                                            <img src="images/avatar_editor/removeSelection.png" alt="Remove" />
+                                        </button>
+                                    }
+                                })}
                             </div>
                             <div className="platform">
                                 {this.generatePlatform()}

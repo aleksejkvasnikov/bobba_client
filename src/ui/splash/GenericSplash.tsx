@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import Logo from './Logo';
 import Credits from './Credits';
 import './splash.css';
 import Draggable from 'react-draggable';
 
-class GenericSplash extends Component {
+interface IGenericSplashProps {
+    children: ReactNode
+}
+class GenericSplash extends Component<IGenericSplashProps> {
 
     render() {
         return (
