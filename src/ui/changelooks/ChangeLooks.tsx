@@ -465,8 +465,8 @@ class ChangeLooks extends React.Component<ChangeLooksProps, ChangeLooksState>  {
                         <div className="first_row">
                             <div className="parts_grid">
                                 {this.state.grid.map(canvas => {
-                                        const ref: RefObject<HTMLImageElement> = React.createRef();
                                     if ((canvas as ButtonWithFlag).button) {
+                                        const ref: RefObject<HTMLImageElement> = React.createRef();
                                        
                                         var button = (canvas as ButtonWithFlag)
                                         const image = canvas2Image(button.button);
