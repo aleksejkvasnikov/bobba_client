@@ -5,16 +5,16 @@
   "dependencies": {
     "@types/jest": "24.0.20",
     "@types/node": "12.11.7",
-    "@types/react": "16.9.11",
-    "@types/react-dom": "16.9.3",
+    "@types/react": "18.2.25",
+    "@types/react-dom": "18.2.1",
     "pixi.js-legacy": "^5.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-draggable": "^4.1.0",
+    "react-draggable": "^4.4.6",
     "react-edit-text": "^5.1.1",
     "react-scripts": "5.0.1",
     "react-snap": "^1.23.0",
-    "typescript": "3.6.4"
+    "typescript": "4"
   },
   "scripts": {
     "start": "react-scripts start",

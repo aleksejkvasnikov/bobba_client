@@ -115,8 +115,8 @@ class BobbaUI extends Component<BobbaUIProps, BobbaUIState> {
             const win: any = window;
             win.mainGame = game;
         }
-        catch (err) {
-            let errorMessage = err;
+        catch (err: any) {
+            let errorMessage: string = err;
 
             if (err instanceof Error) {
                 if (err.message.includes("WebGL unsupported")) {
