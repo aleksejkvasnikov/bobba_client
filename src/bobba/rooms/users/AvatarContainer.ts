@@ -1,7 +1,7 @@
 import { TextureDictionary } from "../../graphics/MainEngine";
 import AvatarInfo, { Direction } from "../../imagers/avatars/AvatarInfo";
 import BobbaEnvironment from "../../BobbaEnvironment";
-import { Texture } from 'pixi.js-legacy';
+import { Texture } from 'pixi.js';
 import { generateSilhouette } from "../../imagers/misc/Silhouettes";
 
 export default class AvatarContainer {
