@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './header.css';
 import BobbaEnvironment from '../../bobba/BobbaEnvironment';
+import Constants from '../../Constants';
 type HeaderProps = {};
 type HeaderState = {
     credits: number,
@@ -33,14 +34,14 @@ class Header extends Component<HeaderProps, HeaderState> {
             <header>
                 <div className="bar_content">
                     <span>{this.getMoneyNumber(credits)}</span>
-                    <img src="images/top_bar/credits.png" alt="Credits" />
+                    <img src={Constants.PUBLIC_RESOURCES_URL + "images/top_bar/credits.png"} alt="Credits" />
                 </div>
                 <div className="bar_content">
                     <span className="logo">bobba.io</span>
                 </div>
                 <div className="bar_content">
                     <span>69</span>
-                    <img src="images/top_bar/hc.png" alt="Habbo club" />
+                    <img src={Constants.PUBLIC_RESOURCES_URL + "images/top_bar/hc.png"} alt="Habbo club" />
                 </div>
             </header>
         );

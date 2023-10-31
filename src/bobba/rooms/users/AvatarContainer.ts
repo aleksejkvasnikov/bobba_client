@@ -58,8 +58,14 @@ export default class AvatarContainer {
         promises.push(this._loadUserInfoImage());
 
         this.color = avatarImager.getChatColor(this.look);
+        var tt = Promise.all(promises)
 
-        return Promise.all(promises);
+        tt 
+        .then(() => {
+            return null
+        
+    });
+    return tt
     }
 
     getSolidHeadTexture(headDirection: Direction, gesture: string, frame: number): Texture {

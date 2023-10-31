@@ -503,7 +503,14 @@ export default class AvatarImager {
         element.width = width;
         element.height = height;
 
-        c.drawImage(img, 0, 0);
+        if (width > c.canvas.width) {
+            width = c.canvas.width;
+        }
+        if (height > c.canvas.height) {
+            height = c.canvas.height;
+        }
+        try {
+        c.drawImage(img, 0, 0, width, height);
         let imageData = c.getImageData(0, 0, width, height);
         for (let y = 0; y < height; y++) {
             let inpos = y * width * 4;
@@ -521,6 +528,12 @@ export default class AvatarImager {
             }
         }
         c.putImageData(imageData, 0, 0);
+    } catch (error) {
+     // we'll proceed, but let's report it
+     console.warn(error)
+     console.warn("width: " + width + " height: " + height + " canvas width: " + c.canvas.width + " canvas height: " + c.canvas.height + " element width: " + element.width + " element height: " + element.height)
+     throw error;
+   }
         return element;
     }
 

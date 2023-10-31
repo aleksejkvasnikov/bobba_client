@@ -1,3 +1,4 @@
+import Constants from "../../../Constants";
 import ChatStyle, { RegPoints } from "./ChatStyle";
 
 export default class ChatImager {
@@ -8,12 +9,13 @@ export default class ChatImager {
     }
 
     initialize(): Promise<void> {
-        const base = "assets/normal_chat/style_normal_chat_bubble_base.png";
-        const color = "assets/normal_chat/style_normal_chat_bubble_color.png";
-        const pointer = "assets/normal_chat/style_normal_chat_bubble_pointer.png";
-        const regpoints = "assets/normal_chat/regpoints.json";
+        const base = Constants.PUBLIC_RESOURCES_URL + "assets/normal_chat/style_normal_chat_bubble_base.png";
+        const color = Constants.PUBLIC_RESOURCES_URL + "assets/normal_chat/style_normal_chat_bubble_color.png";
+        const pointer = Constants.PUBLIC_RESOURCES_URL + "assets/normal_chat/style_normal_chat_bubble_pointer.png";
+        const regpoints = Constants.PUBLIC_RESOURCES_URL + "assets/normal_chat/regpoints.json";
         return this._downloadChatStyle(regpoints, base, pointer, color).then(style => {
             this.chatStyles[0] = style;
+            console.warn("323")
         });
     }
 

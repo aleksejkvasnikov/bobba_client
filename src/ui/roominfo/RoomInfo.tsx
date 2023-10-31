@@ -3,6 +3,7 @@ import Draggable from 'react-draggable';
 import './roominfo.css';
 import RoomData, { LockType } from '../../bobba/navigator/RoomData';
 import BobbaEnvironment from '../../bobba/BobbaEnvironment';
+import Constants from '../../Constants';
 
 type RoomInfoProps = {};
 type RoomInfoState = {
@@ -48,13 +49,13 @@ class RoomInfo extends Component<RoomInfoProps, RoomInfoState> {
                     <p className="owner_info">Owner: <span className="owner_name">{roomData.owner}</span></p>
                     <div className="buttons_container">
                         <button>
-                            <img src="images/room_info/clear_favourite.png" alt="Favorite" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/room_info/clear_favourite.png"} alt="Favorite" />
                         </button>
                         <button>
-                            <img src="images/room_info/settings_icon.png" alt="Settings" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/room_info/settings_icon.png"} alt="Settings" />
                         </button>
                         <button>
-                            <img src="images/room_info/chat_history.png" alt="Chat history" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/room_info/chat_history.png"} alt="Chat history" />
                         </button>
                     </div>
                 </div>

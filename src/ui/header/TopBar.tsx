@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Constants from '../../Constants';
 
 class TopBar extends Component {
 
@@ -6,10 +7,10 @@ class TopBar extends Component {
         return (
             <div className="top_bar">
                 <button className="bar_content">
-                    <img src="images/top_bar/settings.png" alt="Settings" />
+                    <img src={Constants.PUBLIC_RESOURCES_URL + "images/top_bar/settings.png"} alt="Settings" />
                 </button>
                 <button className="bar_content">
-                    <img src="images/top_bar/logout.png" alt="Logout" />
+                    <img src={Constants.PUBLIC_RESOURCES_URL + "images/top_bar/logout.png"} alt="Logout" />
                 </button>
             </div>
         );

@@ -24,6 +24,7 @@ import RoomImager from "./imagers/rooms/RoomImager";
 import Messenger from "./messenger/Messenger";
 import RequestMessengerLoadFriends from "./communication/outgoing/messenger/RequestMessengerLoadFriends";
 import Constants from "../Constants";
+import { DisplayObject } from "pixi.js";
 
 export default class Game {
     currentRoom?: Room;
@@ -68,14 +69,18 @@ export default class Game {
     loadGame(): Promise<void> {
         this.isStarting = true;
         const sprites: string[] = [
-            ROOM_SELECTED_TILE,
-            FLOOR_ITEM_PLACEHOLDER,
-            WALL_ITEM_PLACEHOLDER,
-            ROOM_TILE_SHADOW
+            Constants.PUBLIC_RESOURCES_URL + ROOM_SELECTED_TILE,
+            Constants.PUBLIC_RESOURCES_URL + FLOOR_ITEM_PLACEHOLDER,
+            Constants.PUBLIC_RESOURCES_URL + WALL_ITEM_PLACEHOLDER,
+            Constants.PUBLIC_RESOURCES_URL + ROOM_TILE_SHADOW
         ];
         this.uiManager.postLoading("Initializing game engine");
         return Promise.all([
-            this.avatarImager.initialize().then(() => this.ghostTextures.initialize()),
+            new Promise((resolve, reject) => this.avatarImager.initialize().then(() => this.ghostTextures.initialize().then(() => {
+
+            console.warn("123")
+                resolve(null)
+            }))),
             this.furniImager.initialize(),
             this.chatImager.initialize(),
             this.meMenuImager.initialize(),
@@ -117,8 +122,8 @@ export default class Game {
         this.engine.onEnterRoom();
 
         this.currentRoom = new Room(model);
-        this.engine.getLogicStage().addChild(this.currentRoom.engine.getLogicStage());
-        this.engine.getMainStage().addChild(this.currentRoom.engine.getStage());
+        this.engine.getLogicStage().addChild(this.currentRoom.engine.getLogicStage() as DisplayObject);
+        this.engine.getMainStage().addChild(this.currentRoom.engine.getStage() as DisplayObject);
         this.uiManager.log("Loaded heightmap");
         this.uiManager.onCloseNavigator();
         this.uiManager.onCloseCreateRoom();

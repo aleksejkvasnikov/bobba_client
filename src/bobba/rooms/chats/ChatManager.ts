@@ -1,6 +1,6 @@
 import Chat from "./Chat";
 import Room from "../Room";
-import { Container, Sprite } from 'pixi.js';
+import { Container, DisplayObject, Sprite } from 'pixi.js';
 import BobbaEnvironment from "../../BobbaEnvironment";
 
 export default class ChatManager {
@@ -45,7 +45,7 @@ export default class ChatManager {
             }
 
             this.chats.push(new Chat(message, roomUser, sprite));
-            this.container.addChild(sprite);
+            this.container.addChild(sprite as DisplayObject);
             this._needsRoll = true;
         }
     }

@@ -1,5 +1,5 @@
 import Room from "../Room";
-import { Container, Sprite, BLEND_MODES } from 'pixi.js';
+import { Container, Sprite, BLEND_MODES, DisplayObject } from 'pixi.js';
 import BaseItem from "../../items/BaseItem";
 import BobbaEnvironment from "../../BobbaEnvironment";
 import RequestFurniInteract from "../../communication/outgoing/rooms/RequestFurniInteract";
@@ -61,11 +61,11 @@ export default abstract class RoomItem implements Selectable {
 
         this.sprites = [placeholderSprite];
         this.containers = [placeholderContainer];
-        this.containers[0].addChild(placeholderSprite);
+        this.containers[0].addChild(placeholderSprite as DisplayObject);
 
         this.selectableSprites = [placeholderSelectableSprite];
         this.selectableContainers = [placeholderSelectableContainer];
-        this.selectableContainers[0].addChild(placeholderSelectableSprite);
+        this.selectableContainers[0].addChild(placeholderSelectableSprite as DisplayObject);
         this.updateSpritePosition();
     }
 
@@ -121,10 +121,10 @@ export default abstract class RoomItem implements Selectable {
                 selectableSprite.visible = false;
 
                 const currentContainer = new Container();
-                currentContainer.addChild(sprite);
+                currentContainer.addChild(sprite as DisplayObject);
 
                 const currentSelectableContainer = new Container();
-                currentSelectableContainer.addChild(selectableSprite);
+                currentSelectableContainer.addChild(selectableSprite as DisplayObject);
 
                 this.sprites.push(sprite);
                 this.containers.push(currentContainer);

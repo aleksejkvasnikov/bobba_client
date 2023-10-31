@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GenericSplash from './GenericSplash';
+import Constants from '../../Constants';
 
 type LoadingProps = {
     loadingText: string,
@@ -11,7 +12,7 @@ class Loading extends Component<LoadingProps> {
         return (
             <GenericSplash>
                 <div className="loading">
-                    <img src="images/loading.gif" alt="Loading" />
+                    <img src={Constants.PUBLIC_RESOURCES_URL + "images/loading.gif"} alt="Loading" />
                     <p>Loading...</p>
                     <p className="loading_info">
                         {loadingText}

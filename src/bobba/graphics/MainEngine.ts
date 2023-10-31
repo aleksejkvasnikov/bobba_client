@@ -54,9 +54,10 @@ export default class MainEngine {
 
     loadGlobalTextures(texturesUrl: string[]): Promise<void> {
         return new Promise(() => {
-            for (let resourceId in texturesUrl) {
+            for (var resourceId of texturesUrl) {
                 this.globalTextures[resourceId] = PIXI.Texture.from(resourceId);
             }
+            console.warn("623")
         });
     }
 
