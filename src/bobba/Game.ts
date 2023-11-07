@@ -66,7 +66,7 @@ export default class Game {
         this.isStarting = false;
     }
 
-    loadGame(): Promise<void> {
+    async loadGame(): Promise<void> {
         this.isStarting = true;
         const sprites: string[] = [
             Constants.PUBLIC_RESOURCES_URL + ROOM_SELECTED_TILE,
@@ -75,7 +75,7 @@ export default class Game {
             Constants.PUBLIC_RESOURCES_URL + ROOM_TILE_SHADOW
         ];
         this.uiManager.postLoading("Initializing game engine");
-        return Promise.all([
+        var p = Promise.all([
             new Promise((resolve, reject) => this.avatarImager.initialize().then(() => this.ghostTextures.initialize().then(() => {
 
             console.warn("123")
@@ -85,8 +85,14 @@ export default class Game {
             this.chatImager.initialize(),
             this.meMenuImager.initialize(),
             this.roomImager.initialize(),
-            this.engine.loadGlobalTextures(sprites),
-        ]).then(() => {
+            //this.engine.loadGlobalTextures(sprites)
+        ])
+        console.warn("711")
+        await p
+        console.warn("712")
+        p.then(() => console.warn("722"))
+        return p.then(() => {
+            console.warn("723")
             this.uiManager.postLoading("Connecting to server");
             return this.communicationManager.connect(Constants.WS_URL);
         });
