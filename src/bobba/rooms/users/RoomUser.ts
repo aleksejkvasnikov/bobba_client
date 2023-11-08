@@ -266,7 +266,6 @@ export default class RoomUser implements Selectable {
             this.bodySprite.texture = BobbaEnvironment.getGame().ghostTextures.getBodyTexture(this.rot, action, bodyFrame);
             this.headSprite.texture = BobbaEnvironment.getGame().ghostTextures.getHeadTexture(this.headRot, gesture, headFrame);
         }
-        console.log("update")
     }
 
     getSpriteX() {

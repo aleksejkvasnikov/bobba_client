@@ -85,7 +85,7 @@ export default class Game {
             this.chatImager.initialize(),
             this.meMenuImager.initialize(),
             this.roomImager.initialize(),
-            //this.engine.loadGlobalTextures(sprites)
+            this.engine.loadGlobalTextures(sprites)
         ])
         console.warn("711")
         await p
