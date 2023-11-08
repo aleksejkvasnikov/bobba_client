@@ -7,6 +7,7 @@ import RequestMovement from "../communication/outgoing/rooms/RequestMovement";
 import FloorItem from "./items/FloorItem";
 import RoomItem from "./items/RoomItem";
 import { Direction } from "../imagers/furniture/FurniImager";
+import Constants from "../../Constants";
 
 const CAMERA_CENTERED_OFFSET_X = 0;
 const CAMERA_CENTERED_OFFSET_Y = 150;
@@ -90,7 +91,7 @@ export default class RoomEngine {
     }
 
     setSelectedTile() {
-        const floorTexture = BobbaEnvironment.getGame().engine.getTexture(ROOM_SELECTED_TILE);
+        const floorTexture = BobbaEnvironment.getGame().engine.getTexture(Constants.PUBLIC_RESOURCES_URL + ROOM_SELECTED_TILE);
         this.selectedTileSprite = new Sprite(floorTexture);
         this.selectedTileSprite.visible = false;
         this.container.addChild(this.selectedTileSprite as DisplayObject);
@@ -595,8 +596,8 @@ export default class RoomEngine {
             this.selectedTileSprite.visible = visible;
             if (visible) {
                 const localPos = this.tileToLocal(tileX, tileY, model.heightMap[tileX][tileY] - 1);
-                this.selectedTileSprite.x = localPos.x + ROOM_SELECTED_TILE_OFFSET_X;
-                this.selectedTileSprite.y = localPos.y + ROOM_SELECTED_TILE_OFFSET_Y;
+                this.selectedTileSprite.position.x = localPos.x + ROOM_SELECTED_TILE_OFFSET_X;
+                this.selectedTileSprite.position.y = localPos.y + ROOM_SELECTED_TILE_OFFSET_Y;
             }
 
             this.selectedTileSprite.zIndex = calculateZIndex(tileX, tileY, 0, model.doorX === tileX && model.doorY === tileY ? PRIORITY_DOOR_FLOOR_SELECT : PRIORITY_FLOOR_SELECT);
