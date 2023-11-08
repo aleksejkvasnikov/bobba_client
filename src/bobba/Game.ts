@@ -76,23 +76,17 @@ export default class Game {
         ];
         this.uiManager.postLoading("Initializing game engine");
         var p = Promise.all([
-            new Promise((resolve, reject) => this.avatarImager.initialize().then(() => this.ghostTextures.initialize().then(() => {
-
-            console.warn("123")
+            new Promise((resolve, reject) => this.avatarImager.initialize().then(() => {
+                this.ghostTextures.initialize()
                 resolve(null)
-            }))),
+            })),
             this.furniImager.initialize(),
             this.chatImager.initialize(),
             this.meMenuImager.initialize(),
             this.roomImager.initialize(),
             this.engine.loadGlobalTextures(sprites)
         ])
-        console.warn("711")
-        await p
-        console.warn("712")
-        p.then(() => console.warn("722"))
         return p.then(() => {
-            console.warn("723")
             this.uiManager.postLoading("Connecting to server");
             return this.communicationManager.connect(Constants.WS_URL);
         });

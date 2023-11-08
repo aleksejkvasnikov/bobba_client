@@ -146,7 +146,6 @@ export default class FurniImager {
         const p = this._loadFiles();
         return Promise.all(p).then(() => {
             this.ready = true;
-            console.warn("223")
         });
     }
 

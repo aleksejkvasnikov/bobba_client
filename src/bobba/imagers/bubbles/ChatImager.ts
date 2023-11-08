@@ -15,7 +15,6 @@ export default class ChatImager {
         const regpoints = Constants.PUBLIC_RESOURCES_URL + "assets/normal_chat/regpoints.json";
         return this._downloadChatStyle(regpoints, base, pointer, color).then(style => {
             this.chatStyles[0] = style;
-            console.warn("323")
         });
     }
 

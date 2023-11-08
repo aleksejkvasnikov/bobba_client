@@ -15,7 +15,6 @@ export default class RoomImager {
         if (stairRCanvas != null) {
             this.roomStairRTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(stairRCanvas);
         }
-        console.warn("523")
         resolve(null)})
     }
 

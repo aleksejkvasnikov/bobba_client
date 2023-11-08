@@ -57,7 +57,6 @@ export default class MainEngine {
             for (var resourceId of texturesUrl) {
                 this.globalTextures[resourceId] = PIXI.Texture.from(resourceId);
             }
-            console.warn("623")
             resolve()
         });
     }

@@ -40,12 +40,8 @@ class SplashScreen extends Component<SplashScreenProps, SplashScreenState> {
         var looks: LookGroup[] = []
 
         skins.forEach(skin => {
-            console.log(skin)
             avatarImager.generateGeneric(new AvatarInfo(skin, 4, 4, ["wlk"], "std", 2, false, false, "n"), false).then(canvas => {
-                console.log("asdf" + skin)
-                console.log("thislooks" + this.state.looks.length)
                 looks = looks.concat({ figure: skin, image: canvas2Image(canvas) });
-                console.log("looks" + looks.length)
                 this.setState({
                     looks,
                 });

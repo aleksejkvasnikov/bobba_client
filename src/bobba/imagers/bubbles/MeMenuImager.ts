@@ -11,18 +11,11 @@ export default class MeMenuImager {
         var result = Promise.all([
             this._downloadImageAsync(Constants.PUBLIC_RESOURCES_URL + BASE_IMAGE_URL).then(img => {
                 this.baseImage = img;
-
-            console.warn("423")
             }),
             this._downloadImageAsync(Constants.PUBLIC_RESOURCES_URL + POINTER_IMAGE_URL).then(img => {
                 this.pointerImage = img;
-                console.warn("424")
             })
         ])
-        result.then(() => {
-
-            console.warn("425")
-            })
         return result
     }
 
