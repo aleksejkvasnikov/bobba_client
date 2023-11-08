@@ -503,31 +503,24 @@ export default class AvatarImager {
         element.width = width;
         element.height = height;
 
-        try {
-            c.drawImage(img, 0, 0, width, height);
-            let imageData = c.getImageData(0, 0, width, height);
-            for (let y = 0; y < height; y++) {
-                let inpos = y * width * 4;
-                for (let x = 0; x < width; x++) {
-                    inpos++; //r
-                    inpos++; //g
-                    inpos++; //b
-                    let pa = imageData.data[inpos++];
-                    if (pa !== 0) {
-                        imageData.data[inpos - 1] = alpha; //A
-                        imageData.data[inpos - 2] = Math.round(rgb.b * imageData.data[inpos - 2] / 255); //B
-                        imageData.data[inpos - 3] = Math.round(rgb.g * imageData.data[inpos - 3] / 255); //G
-                        imageData.data[inpos - 4] = Math.round(rgb.r * imageData.data[inpos - 4] / 255); //R
-                    }
+        c.drawImage(img, 0, 0, width, height);
+        let imageData = c.getImageData(0, 0, width, height);
+        for (let y = 0; y < height; y++) {
+            let inpos = y * width * 4;
+            for (let x = 0; x < width; x++) {
+                inpos++; //r
+                inpos++; //g
+                inpos++; //b
+                let pa = imageData.data[inpos++];
+                if (pa !== 0) {
+                    imageData.data[inpos - 1] = alpha; //A
+                    imageData.data[inpos - 2] = Math.round(rgb.b * imageData.data[inpos - 2] / 255); //B
+                    imageData.data[inpos - 3] = Math.round(rgb.g * imageData.data[inpos - 3] / 255); //G
+                    imageData.data[inpos - 4] = Math.round(rgb.r * imageData.data[inpos - 4] / 255); //R
                 }
             }
-            c.putImageData(imageData, 0, 0);
-        } catch (error) {
-            // we'll proceed, but let's report it
-            console.warn(error)
-            console.warn("width: " + width + " height: " + height + " canvas width: " + c.canvas.width + " canvas height: " + c.canvas.height + " element width: " + element.width + " element height: " + element.height)
-            throw error;
         }
+        c.putImageData(imageData, 0, 0);
         return element;
     }
 

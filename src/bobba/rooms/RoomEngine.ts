@@ -596,8 +596,8 @@ export default class RoomEngine {
             this.selectedTileSprite.visible = visible;
             if (visible) {
                 const localPos = this.tileToLocal(tileX, tileY, model.heightMap[tileX][tileY] - 1);
-                this.selectedTileSprite.position.x = localPos.x + ROOM_SELECTED_TILE_OFFSET_X;
-                this.selectedTileSprite.position.y = localPos.y + ROOM_SELECTED_TILE_OFFSET_Y;
+                this.selectedTileSprite.x = localPos.x + ROOM_SELECTED_TILE_OFFSET_X;
+                this.selectedTileSprite.y = localPos.y + ROOM_SELECTED_TILE_OFFSET_Y;
             }
 
             this.selectedTileSprite.zIndex = calculateZIndex(tileX, tileY, 0, model.doorX === tileX && model.doorY === tileY ? PRIORITY_DOOR_FLOOR_SELECT : PRIORITY_FLOOR_SELECT);

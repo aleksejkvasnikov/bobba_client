@@ -8,7 +8,7 @@ export default class MeMenuImager {
     pointerImage?: HTMLImageElement;
 
     initialize(): Promise<void[]> {
-        var result = Promise.all([
+        return Promise.all([
             this._downloadImageAsync(Constants.PUBLIC_RESOURCES_URL + BASE_IMAGE_URL).then(img => {
                 this.baseImage = img;
             }),
@@ -16,7 +16,6 @@ export default class MeMenuImager {
                 this.pointerImage = img;
             })
         ])
-        return result
     }
 
     _downloadImageAsync(resourceName: string): Promise<HTMLImageElement> {

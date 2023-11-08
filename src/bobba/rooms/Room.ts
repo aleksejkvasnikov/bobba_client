@@ -42,4 +42,4 @@ export default class Room {
         this.engine.getStage().visible = false;
         this.engine.getStage().removeChild();
     }
- }
+}

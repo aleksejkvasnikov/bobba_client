@@ -9,13 +9,13 @@ export default class RoomImager {
     initialize() {
 
         return new Promise((resolve, reject) => {
-        this.roomTileTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateFloorTile(7));
-        this.roomStairLTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateStairL());
-        const stairRCanvas = this.generateStairR();
-        if (stairRCanvas != null) {
-            this.roomStairRTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(stairRCanvas);
-        }
-        resolve(null)})
+            this.roomTileTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateFloorTile(7));
+            this.roomStairLTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateStairL());
+            const stairRCanvas = this.generateStairR();
+            if (stairRCanvas != null) {
+                this.roomStairRTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(stairRCanvas);
+            }
+            resolve(null)})
     }
 
     generateRoomWallL(z: number): Texture {
