@@ -11,6 +11,7 @@ export default class MainEngine {
     onMouseDoubleClickHandler: (mouseX: number, mouseY: number) => void;
     isMouseDragging: boolean;
     globalTextures: TextureDictionary;
+    oldTime: number;
 
     constructor(gameLoop: Function, onResize: () => void,
         onMouseMove: (mouseX: number, mouseY: number, isDrag: boolean) => void,
@@ -41,8 +42,8 @@ export default class MainEngine {
             resolution: 1,
         });
 
-        app.ticker.add(delta => gameLoop(delta));
-        app.ticker.minFPS = 0;
+        this.oldTime = Date.now()
+        requestAnimationFrame(() => this.animate(gameLoop))
 
         this.pixiApp = app;
         this.logicPixiApp = logicApp;
@@ -50,6 +51,16 @@ export default class MainEngine {
         window.addEventListener('resize', this.onResize, false);
 
         this.setMouseInteractions();
+    }
+
+    animate(gameLoop: Function) {
+        var newTime = Date.now();
+        var deltaTime = newTime - this.oldTime
+        if (deltaTime > 50) {
+            this.oldTime = newTime
+            gameLoop(deltaTime)
+        }
+        requestAnimationFrame(() => this.animate(gameLoop))
     }
 
     loadGlobalTextures(texturesUrl: string[]): Promise<void> {

@@ -32,10 +32,12 @@ export default class Room {
     }
 
     tick(delta: number) {
+        console.log('updating')
         this.engine.tick(delta);
         this.roomUserManager.tick(delta);
         this.roomItemManager.tick(delta);
         this.chatManager.tick(delta);
+        console.log('updated')
     }
 
     dispose() {
