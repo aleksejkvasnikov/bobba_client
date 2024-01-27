@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 import './messenger.css';
 import User from '../../bobba/users/User';
 import BobbaEnvironment from '../../bobba/BobbaEnvironment';
+import Constants from '../../Constants';
 
 enum Tabs {
     Friends, Search, Requests, None,
@@ -230,10 +231,10 @@ export default class Messenger extends React.Component<MessengerProps, Messenger
                         </div>
                         <div className="actions_container">
                             <button onClick={this.requestRemoveFriend(currentSelectedFriendId)}>
-                                <img src="/images/messenger/remove_friend.png" alt="Remove friend" />
+                                <img src={Constants.PUBLIC_RESOURCES_URL + "/images/messenger/remove_friend.png"} alt="Remove friend" />
                             </button>
                             <button onClick={this.requestStartChat(currentSelectedFriendId)}>
-                                <img src="/images/messenger/open_inbox.png" alt="Open inbox" />
+                                <img src={Constants.PUBLIC_RESOURCES_URL + "/images/messenger/open_inbox.png"} alt="Open inbox" />
                             </button>
                         </div>
                     </div>
@@ -350,7 +351,7 @@ export default class Messenger extends React.Component<MessengerProps, Messenger
             <>
                 <div className="footer">
                     <button>
-                        <img src="/images/messenger/open_edit_ctgs.png" alt="Settings" />
+                        <img src={Constants.PUBLIC_RESOURCES_URL + "/images/messenger/open_edit_ctgs.png"} alt="Settings" />
                         <span>Settings</span>
                     </button>
                 </div>

@@ -503,7 +503,7 @@ export default class AvatarImager {
         element.width = width;
         element.height = height;
 
-        c.drawImage(img, 0, 0);
+        c.drawImage(img, 0, 0, width, height);
         let imageData = c.getImageData(0, 0, width, height);
         for (let y = 0; y < height; y++) {
             let inpos = y * width * 4;

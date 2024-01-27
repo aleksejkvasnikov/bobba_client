@@ -1,7 +1,7 @@
 import { TextureDictionary } from "../../graphics/MainEngine";
 import AvatarInfo, { Direction } from "../../imagers/avatars/AvatarInfo";
 import BobbaEnvironment from "../../BobbaEnvironment";
-import { Texture } from 'pixi.js-legacy';
+import { Texture } from 'pixi.js';
 import { generateSilhouette } from "../../imagers/misc/Silhouettes";
 
 export default class AvatarContainer {
@@ -58,8 +58,7 @@ export default class AvatarContainer {
         promises.push(this._loadUserInfoImage());
 
         this.color = avatarImager.getChatColor(this.look);
-
-        return Promise.all(promises);
+        return Promise.all(promises)
     }
 
     getSolidHeadTexture(headDirection: Direction, gesture: string, frame: number): Texture {

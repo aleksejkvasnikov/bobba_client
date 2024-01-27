@@ -1,4 +1,4 @@
-import { Texture } from 'pixi.js-legacy';
+import { Texture } from 'pixi.js';
 import BobbaEnvironment from "../../BobbaEnvironment";
 import { flipImage } from "../furniture/FurniBase";
 
@@ -7,12 +7,15 @@ export default class RoomImager {
     roomStairLTexture?: Texture;
     roomStairRTexture?: Texture;
     initialize() {
-        this.roomTileTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateFloorTile(7));
-        this.roomStairLTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateStairL());
-        const stairRCanvas = this.generateStairR();
-        if (stairRCanvas != null) {
-            this.roomStairRTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(stairRCanvas);
-        }
+
+        return new Promise((resolve, reject) => {
+            this.roomTileTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateFloorTile(7));
+            this.roomStairLTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(this.generateStairL());
+            const stairRCanvas = this.generateStairR();
+            if (stairRCanvas != null) {
+                this.roomStairRTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(stairRCanvas);
+            }
+            resolve(null)})
     }
 
     generateRoomWallL(z: number): Texture {

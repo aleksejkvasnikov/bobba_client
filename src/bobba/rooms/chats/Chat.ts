@@ -1,5 +1,5 @@
 import RoomUser from "../users/RoomUser";
-import { Sprite } from 'pixi.js-legacy';
+import { Sprite } from 'pixi.js';
 
 export default class Chat {
     message: string;

@@ -1,5 +1,5 @@
 import Room from "./Room";
-import { Sprite, Container, Point, Texture } from 'pixi.js-legacy';
+import { Sprite, Container, Point, Texture, DisplayObject } from 'pixi.js';
 import BobbaEnvironment from "../BobbaEnvironment";
 import MainEngine from "../graphics/MainEngine";
 import { ROOM_TILE_WIDTH, ROOM_TILE_HEIGHT, ROOM_SELECTED_TILE, ROOM_WALL_L_OFFSET_X, ROOM_WALL_L_OFFSET_Y, ROOM_WALL_R_OFFSET_X, ROOM_WALL_R_OFFSET_Y } from "../graphics/GenericSprites";
@@ -7,6 +7,7 @@ import RequestMovement from "../communication/outgoing/rooms/RequestMovement";
 import FloorItem from "./items/FloorItem";
 import RoomItem from "./items/RoomItem";
 import { Direction } from "../imagers/furniture/FurniImager";
+import Constants from "../../Constants";
 
 const CAMERA_CENTERED_OFFSET_X = 0;
 const CAMERA_CENTERED_OFFSET_Y = 150;
@@ -90,28 +91,28 @@ export default class RoomEngine {
     }
 
     setSelectedTile() {
-        const floorTexture = BobbaEnvironment.getGame().engine.getTexture(ROOM_SELECTED_TILE);
+        const floorTexture = BobbaEnvironment.getGame().engine.getTexture(Constants.PUBLIC_RESOURCES_URL + ROOM_SELECTED_TILE);
         this.selectedTileSprite = new Sprite(floorTexture);
         this.selectedTileSprite.visible = false;
-        this.container.addChild(this.selectedTileSprite);
+        this.container.addChild(this.selectedTileSprite as DisplayObject);
     }
 
     setChatContainer(container: Container) {
         container.zIndex = calculateZIndexChat();
-        this.container.addChild(container);
+        this.container.addChild(container as DisplayObject);
     }
 
     addUserContainer(id: number, container: Container, shadowSprite: Sprite) {
         this.userSprites[id] = container;
         this.shadowSprites[id] = shadowSprite;
-        this.container.addChild(container);
-        this.container.addChild(shadowSprite);
+        this.container.addChild(container as DisplayObject);
+        this.container.addChild(shadowSprite as DisplayObject);
     }
 
     addRoomItemContainerSet(id: number, containers: Container[]) {
         this.roomItemSprites[id] = containers;
         for (let container of containers) {
-            this.container.addChild(container);
+            this.container.addChild(container as DisplayObject);
         }
     }
 
@@ -120,7 +121,7 @@ export default class RoomEngine {
         this.selectableItems[colorId] = selectableElement;
 
         for (let container of selectableContainers) {
-            this.selectableContainer.addChild(container);
+            this.selectableContainer.addChild(container as DisplayObject);
         }
     }
 
@@ -274,7 +275,7 @@ export default class RoomEngine {
         const containers = this.selectableSprites[colorId];
         if (containers != null) {
             for (let container of containers) {
-                this.selectableContainer.removeChild(container);
+                this.selectableContainer.removeChild(container as DisplayObject);
             }
             delete (this.selectableSprites[colorId]);
         }
@@ -289,7 +290,7 @@ export default class RoomEngine {
         const containers = this.roomItemSprites[id];
         if (containers != null) {
             for (let container of containers) {
-                this.container.removeChild(container);
+                this.container.removeChild(container as DisplayObject);
             }
             delete (this.roomItemSprites[id]);
         }
@@ -299,11 +300,11 @@ export default class RoomEngine {
         const sprite = this.userSprites[id];
         const shadowSprite = this.shadowSprites[id];
         if (sprite != null) {
-            this.container.removeChild(sprite);
+            this.container.removeChild(sprite as DisplayObject);
             delete (this.userSprites[id]);
         }
         if (shadowSprite != null) {
-            this.container.removeChild(shadowSprite);
+            this.container.removeChild(shadowSprite as DisplayObject);
             delete (this.shadowSprites[id]);
         }
     }
@@ -315,7 +316,7 @@ export default class RoomEngine {
         currentSprite.y = localPos.y + offsetY;
         currentSprite.zIndex = calculateZIndex(x, y, 0, priority);
         this.wallSprites.push(currentSprite);
-        this.container.addChild(currentSprite);
+        this.container.addChild(currentSprite as DisplayObject);
     }
 
     setWalls() {
@@ -386,7 +387,7 @@ export default class RoomEngine {
 
                         currentSprite.zIndex = calculateZIndex(i, j, 0, model.doorX === i && model.doorY === j ? PRIORITY_DOOR_FLOOR : PRIORITY_FLOOR);
                         this.floorSprites.push(currentSprite);
-                        this.container.addChild(currentSprite);
+                        this.container.addChild(currentSprite as DisplayObject);
                     } else if (model.isValidTile(i - 1, j) && model.heightMap[i - 1][j] > tile) { }
                     else if (model.isValidTile(i, j - 1) && model.heightMap[i][j - 1] > tile) { }
                     else if (model.isValidTile(i, j + 1) && model.heightMap[i][j + 1] < tile) {
@@ -397,7 +398,7 @@ export default class RoomEngine {
 
                         currentSprite.zIndex = calculateZIndex(i, j, 0, model.doorX === i && model.doorY === j ? PRIORITY_DOOR_FLOOR : PRIORITY_FLOOR);
                         this.floorSprites.push(currentSprite);
-                        this.container.addChild(currentSprite);
+                        this.container.addChild(currentSprite as DisplayObject);
                     }
                     else {
                         const currentSprite = new Sprite(roomTileTexture);
@@ -407,7 +408,7 @@ export default class RoomEngine {
 
                         currentSprite.zIndex = calculateZIndex(i, j, 0, model.doorX === i && model.doorY === j ? PRIORITY_DOOR_FLOOR : PRIORITY_FLOOR);
                         this.floorSprites.push(currentSprite);
-                        this.container.addChild(currentSprite);
+                        this.container.addChild(currentSprite as DisplayObject);
                     }
                 }
             }
@@ -499,7 +500,7 @@ export default class RoomEngine {
     }
 
     getSelectableColorId(mouseX: number, mouseY: number): number {
-        const pixels = BobbaEnvironment.getGame().engine.logicPixiApp.renderer.extract.pixels(this.getLogicStage());
+        const pixels = BobbaEnvironment.getGame().engine.logicPixiApp.renderer.extract.pixels(this.getLogicStage() as DisplayObject);
 
         const bounds = this.getLogicStage().getBounds();
         const stageX = Math.floor(mouseX - bounds.x);

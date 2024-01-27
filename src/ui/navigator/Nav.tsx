@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 import './nav.css';
 import BobbaEnvironment from '../../bobba/BobbaEnvironment';
 import RoomData, { LockType } from '../../bobba/navigator/RoomData';
+import Constants from '../../Constants';
 
 type MainTabId = 'rooms' | 'me' | 'search';
 type NavigatorProps = {};
@@ -206,7 +207,7 @@ export default class Navigator extends React.Component<NavigatorProps, Navigator
                         </div>
                         <div className="more_rooms">
                             <div className="info">
-                                <img src="images/navigator/create_room.png" alt="More rooms" />
+                                <img src={Constants.PUBLIC_RESOURCES_URL + "images/navigator/create_room.png"} alt="More rooms" />
                                 <span>More rooms?</span>
                             </div>
                             <button onClick={this.handleCreateRoom}>Create room</button>

@@ -37,10 +37,11 @@ class SplashScreen extends Component<SplashScreenProps, SplashScreenState> {
 
     componentDidMount() {
         const avatarImager = BobbaEnvironment.getGame().avatarImager;
+        var looks: LookGroup[] = []
 
         skins.forEach(skin => {
             avatarImager.generateGeneric(new AvatarInfo(skin, 4, 4, ["wlk"], "std", 2, false, false, "n"), false).then(canvas => {
-                const looks = this.state.looks.concat({ figure: skin, image: canvas2Image(canvas) });
+                looks = looks.concat({ figure: skin, image: canvas2Image(canvas) });
                 this.setState({
                     looks,
                 });

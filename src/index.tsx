@@ -1,10 +1,7 @@
 import React from 'react';
-import { hydrate, render } from "react-dom";
 import BobbaUI from './ui/BobbaUI';
+import { createRoot } from 'react-dom/client';
 
-const rootElement = document.getElementById("root");
-if (rootElement != null && rootElement.hasChildNodes()) {
-  hydrate(<BobbaUI />, rootElement);
-} else {
-  render(<BobbaUI />, rootElement);
-}
+const rootElement = document.getElementById("root")!;
+const root = createRoot(rootElement); 
+root.render(<BobbaUI />);

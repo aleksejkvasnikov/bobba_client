@@ -1,8 +1,8 @@
-import * as PIXI from 'pixi.js-legacy';
+import * as PIXI from 'pixi.js';
 
 export default class MainEngine {
-    pixiApp: PIXI.Application;
-    logicPixiApp: PIXI.Application;
+    pixiApp: PIXI.Application<HTMLCanvasElement>;
+    logicPixiApp: PIXI.Application<HTMLCanvasElement>;
     onResizeHandler: () => void;
     onMouseMoveHandler: (mouseX: number, mouseY: number, isDrag: boolean) => void;
     onTouchStartHandler: (mouseX: number, mouseY: number) => void;
@@ -27,19 +27,17 @@ export default class MainEngine {
         this.onMouseDoubleClickHandler = onMouseDoubleClick;
         this.globalTextures = {};
 
-        const logicApp = new PIXI.Application({
+        const logicApp = new PIXI.Application<HTMLCanvasElement>({
             width: window.innerWidth,
             height: window.innerHeight,
             antialias: false,
-            transparent: false,
             resolution: 1,
         });
 
-        const app = new PIXI.Application({
+        const app = new PIXI.Application<HTMLCanvasElement>({
             width: window.innerWidth,
             height: window.innerHeight,
             antialias: false,
-            transparent: false,
             resolution: 1,
         });
 
@@ -56,19 +54,10 @@ export default class MainEngine {
 
     loadGlobalTextures(texturesUrl: string[]): Promise<void> {
         return new Promise((resolve, reject) => {
-            const loader = PIXI.Loader.shared;
-            loader.add(texturesUrl);
-            loader.load((loader, resources) => {
-                for (let resourceId in resources) {
-                    const res = resources[resourceId];
-                    if (res !== undefined) {
-                        this.globalTextures[resourceId] = res.texture;
-                    }
-                }
-            });
-
-            loader.onError.add(() => reject('Cannot load global textures'));
-            loader.onComplete.add(() => resolve());
+            for (var resourceId of texturesUrl) {
+                this.globalTextures[resourceId] = PIXI.Texture.from(resourceId);
+            }
+            resolve()
         });
     }
 

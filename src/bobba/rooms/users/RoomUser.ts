@@ -1,4 +1,4 @@
-import { Container, Sprite } from 'pixi.js-legacy';
+import { Container, DisplayObject, Sprite } from 'pixi.js';
 import { Direction } from "../../imagers/avatars/AvatarInfo";
 import Room from "../Room";
 import AvatarContainer from "./AvatarContainer";
@@ -83,8 +83,8 @@ export default class RoomUser implements Selectable {
         this.shadowSprite = new Sprite(BobbaEnvironment.getGame().engine.getTexture(ROOM_TILE_SHADOW));
 
         this.selectableContainer = new Container();
-        this.selectableContainer.addChild(this.selectableBodySprite);
-        this.selectableContainer.addChild(this.selectableHeadSprite);
+        this.selectableContainer.addChild(this.selectableBodySprite as DisplayObject);
+        this.selectableContainer.addChild(this.selectableHeadSprite as DisplayObject);
 
         const signImage = BobbaEnvironment.getGame().meMenuImager.generateSign(this.user.name);
         const signTexture = BobbaEnvironment.getGame().engine.getTextureFromImage(signImage)
@@ -95,9 +95,9 @@ export default class RoomUser implements Selectable {
         this.avatarContainer = new AvatarContainer(this.user.look);
 
         this.container = new Container();
-        this.container.addChild(this.bodySprite);
-        this.container.addChild(this.headSprite);
-        this.container.addChild(this.signSprite);
+        this.container.addChild(this.bodySprite as DisplayObject);
+        this.container.addChild(this.headSprite as DisplayObject);
+        this.container.addChild(this.signSprite as DisplayObject);
 
         this.showSign(5);
         this.updateTexture();

@@ -1,6 +1,7 @@
 import React, { Component, SyntheticEvent, RefObject } from 'react';
 import BobbaEnvironment from '../../bobba/BobbaEnvironment';
 import './footer.css';
+import Constants from '../../Constants';
 
 const MAX_CHAT_LENGTH = 95;
 const initialState = {
@@ -96,7 +97,7 @@ class Footer extends Component<FooterProps, FooterState> {
 
         let userface = (
             <button>
-                <img src="images/bottom_bar/ghosthead.png" alt="Me" />
+                <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/ghosthead.png"} alt="Me" />
             </button>
         );
         if (headImage !== undefined) {
@@ -111,16 +112,16 @@ class Footer extends Component<FooterProps, FooterState> {
                 <div className="footer_container">
                     <div className="left_section">
                         <button onClick={this.leaveRoom}>
-                            <img src="images/bottom_bar/logo.png" alt="Return" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/logo.png"} alt="Return" />
                         </button>
                         <button onClick={this.openNavigator}>
-                            <img src="images/bottom_bar/rooms.png" alt="Rooms" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/rooms.png"} alt="Rooms" />
                         </button>
                         <button onClick={this.openCatalogue}>
-                            <img src="images/bottom_bar/shop.png" alt="Shop" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/shop.png"} alt="Shop" />
                         </button>
                         <button onClick={this.openInventory}>
-                            <img src="images/bottom_bar/inventory.png" alt="Me" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/inventory.png"} alt="Me" />
                         </button>
                     </div>
                     <div className="middle_section">
@@ -128,16 +129,16 @@ class Footer extends Component<FooterProps, FooterState> {
                         <form onSubmit={this.handleSubmit}>
                             <input type="text" ref={this.chatInput} maxLength={MAX_CHAT_LENGTH} name="chat" value={chat} autoComplete="off" placeholder="Click here to chat" onChange={this.handleInputChange} />
                             <button>
-                                <img src="images/bottom_bar/chat_styles.png" alt="Chat styles" />
+                                <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/chat_styles.png"} alt="Chat styles" />
                             </button>
                         </form>
                     </div>
                     <div className="right_section">
                         <button onClick={this.openMessenger}>
-                            <img src="images/bottom_bar/all_friends.png" alt="Friends" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/all_friends.png"} alt="Friends" />
                         </button>
                         <button onClick={this.openChat}>
-                            <img src={"images/bottom_bar/" + (messengerAlert ? 'messenger_notify0': 'messenger') + ".png"} alt="Messenger" />
+                            <img src={Constants.PUBLIC_RESOURCES_URL + "images/bottom_bar/" + (messengerAlert ? 'messenger_notify0': 'messenger') + ".png"} alt="Messenger" />
                         </button>
                     </div>
                 </div>

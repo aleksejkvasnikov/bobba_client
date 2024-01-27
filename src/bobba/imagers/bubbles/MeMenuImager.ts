@@ -1,3 +1,5 @@
+import Constants from "../../../Constants";
+
 const BASE_IMAGE_URL = "assets/memenu/base.png";
 const POINTER_IMAGE_URL = "assets/memenu/pointer.png";
 
@@ -7,13 +9,13 @@ export default class MeMenuImager {
 
     initialize(): Promise<void[]> {
         return Promise.all([
-            this._downloadImageAsync(BASE_IMAGE_URL).then(img => {
+            this._downloadImageAsync(Constants.PUBLIC_RESOURCES_URL + BASE_IMAGE_URL).then(img => {
                 this.baseImage = img;
             }),
-            this._downloadImageAsync(POINTER_IMAGE_URL).then(img => {
+            this._downloadImageAsync(Constants.PUBLIC_RESOURCES_URL + POINTER_IMAGE_URL).then(img => {
                 this.pointerImage = img;
             })
-        ]);
+        ])
     }
 
     _downloadImageAsync(resourceName: string): Promise<HTMLImageElement> {
